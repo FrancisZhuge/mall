@@ -1,5 +1,6 @@
 package com.netease.mall.config;
 
+import com.netease.mall.web.interceptor.LoginRequiredInterceptor;
 import com.netease.mall.web.interceptor.PassportInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +19,9 @@ public class WebConfig implements WebMvcConfigurer{
     @Autowired
     private PassportInterceptor passportInterceptor;
 
+    @Autowired
+    private LoginRequiredInterceptor loginRequiredInterceptor;
+
 
     /**
      * 配置所有无数据的页面跳转
@@ -35,6 +39,7 @@ public class WebConfig implements WebMvcConfigurer{
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(passportInterceptor);
+        registry.addInterceptor(loginRequiredInterceptor).addPathPatterns("/api/*","/show");
     }
 
     /**
