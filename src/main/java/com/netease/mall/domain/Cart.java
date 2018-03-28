@@ -1,19 +1,15 @@
 package com.netease.mall.domain;
 
-import java.util.Date;
-
 /**
  * @author : francis
  * @description :
- * @time : 2018/3/28,0:30
+ * @time : 2018/3/28,11:24
  * @update :
  */
-public class Transaction {
+public class Cart {
     private int id;
     private int buyerId;
     private int productId;
-    private Date buyTime;
-    private double buyPrice;
     private int num;
 
     public int getId() {
@@ -38,22 +34,6 @@ public class Transaction {
 
     public void setProductId(int productId) {
         this.productId = productId;
-    }
-
-    public Date getBuyTime() {
-        return buyTime;
-    }
-
-    public void setBuyTime(Date buyTime) {
-        this.buyTime = buyTime;
-    }
-
-    public double getBuyPrice() {
-        return buyPrice;
-    }
-
-    public void setBuyPrice(double buyPrice) {
-        this.buyPrice = buyPrice;
     }
 
     public int getNum() {

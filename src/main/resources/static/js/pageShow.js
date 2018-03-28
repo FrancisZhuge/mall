@@ -69,7 +69,7 @@ $('add').onclick = function(e){
                         }
                     }
                 };
-                xhr.open('post','/api/addCartContent');
+                xhr.open('post','/api/addCart');
                 xhr.setRequestHeader('Content-Type','application/json');
                 xhr.send(data);
             }.bind(this)

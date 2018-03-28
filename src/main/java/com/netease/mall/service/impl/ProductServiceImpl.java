@@ -146,7 +146,6 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public ProductTransactionVo getProductTranscationById(int productId) {
         Product product = productDao.getProductByProductId(productId);
-        System.out.println(product);
         if(product == null)
             return null;
         ProductTransactionVo productTransactionVo = new ProductTransactionVo();

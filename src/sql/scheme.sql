@@ -41,7 +41,6 @@ CREATE TABLE IF NOT EXISTS product (
   content varchar(1000) NOT NULL COMMENT '正文',
   PRIMARY KEY  (id)
 )CHARSET=utf8 ENGINE=InnoDB;
-CREATE UNIQUE INDEX product_seller_id ON product(seller_id);
 
 -- ------
 -- 交易表
@@ -56,16 +55,15 @@ CREATE TABLE IF NOT EXISTS transaction (
   buy_time DATETIME COMMENT '购买时间',
   PRIMARY KEY (id)
 ) ENGINE=InnoDB AUTO_INCREMENT = 2 DEFAULT CHARSET=utf8;
-CREATE UNIQUE INDEX transaction_product_id ON transaction(product_id);
 
 -- ------
 -- 购物车
 -- ------
-DROP TABLE IF EXISTS cart;
-CREATE TABLE IF NOT EXISTS cart(
-  id BIGINT NOT NULL AUTO_INCREMENT COMMENT '主键',
-  buyer_id BIGINT NOT NULL COMMENT '购买用户id',
-  content_id BIGINT NOT NULL COMMENT '产品id',
-  num INT(11) NOT NULL COMMENT '购买数量',
-  PRIMARY KEY (id)
-)ENGINE = InnoDB DEFAULT CHARSET = utf8;
+# DROP TABLE IF EXISTS cart;
+# CREATE TABLE IF NOT EXISTS cart(
+#   id BIGINT NOT NULL AUTO_INCREMENT COMMENT '主键',
+#   buyer_id BIGINT NOT NULL COMMENT '购买用户id',
+#   product_id BIGINT NOT NULL COMMENT '产品id',
+#   num INT(11) NOT NULL COMMENT '购买数量',
+#   PRIMARY KEY (id)
+# )ENGINE = InnoDB DEFAULT CHARSET = utf8;

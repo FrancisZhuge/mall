@@ -30,6 +30,7 @@ public class WebConfig implements WebMvcConfigurer{
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/login").setViewName("login");
+        registry.addViewController("/public").setViewName("public");
     }
 
     /**
@@ -39,7 +40,7 @@ public class WebConfig implements WebMvcConfigurer{
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(passportInterceptor);
-        registry.addInterceptor(loginRequiredInterceptor).addPathPatterns("/api/*","/show");
+        registry.addInterceptor(loginRequiredInterceptor).addPathPatterns("/api/delete","/logout","/show");
     }
 
     /**
