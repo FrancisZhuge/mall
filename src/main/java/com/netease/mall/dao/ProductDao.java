@@ -2,10 +2,7 @@ package com.netease.mall.dao;
 
 import com.netease.mall.domain.Product;
 import com.netease.mall.domain.Transaction;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -43,4 +40,11 @@ public interface ProductDao {
 
     @Select({" select ", SELECT_FIELDS ," from ", TABLE_NAME ," where id not in (select product_id from transaction where buyer_id = #{buyerId} and num>0) "})
     List<Product> listAllUnboughtProductsByBuyerId(int buyerId);
+
+    @Insert({"insert into ", TABLE_NAME , "(", INSERT_FIELDS ,") values (#{product.sellerId},#{product.price},#{product.title},#{product.image},#{product.summary},#{product.content} )"})
+    @Options(useGeneratedKeys = true,keyProperty = "product.id")
+    int saveProduct(@Param("product") Product product);
+
+    @Update({" update ", TABLE_NAME ," set seller_id=#{product.sellerId}, price=#{product.price}, title=#{product.title}, image=#{product.image}, summary=#{product.summary}, content=#{product.content} where id=#{product.id}"})
+    void updateProduct(@Param("product") Product product);
 }

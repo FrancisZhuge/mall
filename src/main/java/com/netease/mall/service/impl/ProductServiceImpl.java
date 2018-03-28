@@ -180,5 +180,16 @@ public class ProductServiceImpl implements ProductService{
         }
         return productTransactionVo;
     }
+
+    @Override
+    public int saveProduct(Product product) {
+        int count = productDao.saveProduct(product);
+        return count;
+    }
+
+    @Override
+    public void updateProduct(Product product) {
+        productDao.updateProduct(product);
+    }
 }
 

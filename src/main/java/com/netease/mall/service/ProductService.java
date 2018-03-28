@@ -47,4 +47,8 @@ public interface ProductService {
     ProductTransactionVo getProductTranscationById(int productId);
 
     ProductTransactionVo getProductTranscationWithBuyByUserIdAndProductId(int userId, int productId);
+
+    int saveProduct(Product product);
+
+    void updateProduct(Product productNew);
 }

@@ -107,6 +107,6 @@ public class RedisServiceImpl implements RedisService, InitializingBean{
     }
 
     public static void main(String[] args) {
-        JedisPool pool = new JedisPool("redis://localhost:6379");
+        System.out.println(System.getProperty("user"));
     }
 }

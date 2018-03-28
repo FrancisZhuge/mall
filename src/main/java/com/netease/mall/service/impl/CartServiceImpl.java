@@ -35,7 +35,7 @@ public class CartServiceImpl implements CartService{
     @Override
     public void addCart(Map<String, Object> map) {
         int productId = (int) map.get("id");
-        double price = (double) map.get("price");
+        double price = Double.valueOf(map.get("price")+"");
         int num = (int) map.get("num");
         String title = (String) map.get("title");
         //判断是否在redis中存在

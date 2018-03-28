@@ -44,7 +44,7 @@
                         <h3>${x.title}</h3>
                         <div class="price"><span class="v-unit">¥</span><span class="v-value">${x.price}</span></div>
                         <#if user?? && user.userType==0 && x.isBuy><span class="had"><b>已购买</b></span></#if>
-                        <#if user?? && user.userType==1 && x.isSell><span class="had"><b>已售出</b></span></#if>
+                        <#if user?? && user.userType==1 && x.isSell><span class="had"><b>${x.num}</b></span></#if>
                     </a>
                     <#if user?? && user.userType==1 && !x.isSell><span class="u-btn u-btn-normal u-btn-xs del" data-del="${x.id}">删除</span></#if>
                 </li>

@@ -85,7 +85,7 @@ public class CartController {
         for(Map<String, Object> map:maps){
             Transaction transaction = new Transaction();
             transaction.setBuyTime(new Date());
-            transaction.setBuyPrice((Double)map.get("price"));
+            transaction.setBuyPrice(Double.valueOf(map.get("price")+""));
             transaction.setProductId((Integer)map.get("id"));
             transaction.setNum((Integer)map.get("number"));
             transaction.setBuyerId(hostHolder.getUser().getId());

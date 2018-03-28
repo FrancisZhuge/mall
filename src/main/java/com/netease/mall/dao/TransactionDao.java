@@ -30,7 +30,7 @@ public interface TransactionDao {
     @Select({" select SUM(num) from ", TABLE_NAME ," where product_id=#{productId} and buyer_id = #{buyerId} "})
     Integer getTransactionCountByProductIdAndUserId(@Param("productId") int productId, @Param("buyerId") int buyerId);
 
-    @Select({" select ", SELECT_FIELDS ," from ", TABLE_NAME ," where product_id=#{productId} and buyer_id = #{buyerId} limit 0,1"})
+    @Select({" select ", SELECT_FIELDS ," from ", TABLE_NAME ," where product_id=#{productId} and buyer_id = #{buyerId} order by buy_time desc limit 0,1"})
     Transaction getLastTransactionByProductIdAndUserId(@Param("productId") int productId, @Param("buyerId") int buyerId);
 
     @Insert({"insert into ", TABLE_NAME, "(", INSERT_FIELDS,") values (#{transaction.productId},#{transaction.buyerId},#{transaction.buyPrice},#{transaction.num},#{transaction.buyTime})"})
