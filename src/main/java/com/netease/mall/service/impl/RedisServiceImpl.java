@@ -4,6 +4,8 @@ import com.netease.mall.service.RedisService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -17,13 +19,20 @@ import java.util.Set;
  * @update :
  */
 @Service
+@PropertySource("classpath:properties/dev.properties")
 public class RedisServiceImpl implements RedisService, InitializingBean{
     private static final Logger LOGGER = LoggerFactory.getLogger(RedisServiceImpl.class);
+
+
+    //读取配置文件
+    @Value("${redis.host}")
+    private String redisHost;
+
     private JedisPool pool;
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        pool = new JedisPool("redis://localhost:6379");
+        pool = new JedisPool(redisHost);
     }
 
     @Override
@@ -106,7 +115,4 @@ public class RedisServiceImpl implements RedisService, InitializingBean{
         return null;
     }
 
-    public static void main(String[] args) {
-        System.out.println(System.getProperty("user"));
-    }
 }

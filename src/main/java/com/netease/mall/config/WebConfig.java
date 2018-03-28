@@ -5,6 +5,7 @@ import com.netease.mall.web.interceptor.PassportInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.servlet.config.annotation.*;
 
 /**
@@ -15,8 +16,10 @@ import org.springframework.web.servlet.config.annotation.*;
  */
 @Configuration
 @EnableWebMvc
+@PropertySource("classpath:properties/dev.properties")
 public class WebConfig implements WebMvcConfigurer{
 
+    //读取配置文件
     @Value("${img.local.path}")
     private String imgPath;
 
@@ -44,7 +47,8 @@ public class WebConfig implements WebMvcConfigurer{
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(passportInterceptor);
-        registry.addInterceptor(loginRequiredInterceptor).addPathPatterns("/api/delete","/logout","/show");
+        //配置需要登录的路径
+        registry.addInterceptor(loginRequiredInterceptor).addPathPatterns("/api/addCart","/settleAccount","/api/buy","account","/api/delete","/logout","/show","public","/img/**","/api/update","/edit","/editSubmit");
     }
 
     /**

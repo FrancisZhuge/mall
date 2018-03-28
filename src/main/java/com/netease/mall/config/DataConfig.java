@@ -14,7 +14,7 @@ import java.sql.SQLException;
 
 /**
  * @author : francis
- * @description :
+ * @description : 数据库配置
  * @time : 2018/3/27,11:02
  * @update :
  */

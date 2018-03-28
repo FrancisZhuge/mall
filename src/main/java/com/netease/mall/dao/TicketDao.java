@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.*;
 
 /**
  * @author : francis
- * @description :
+ * @description : t票Dao
  * @time : 2018/3/27,15:36
  * @update :
  */

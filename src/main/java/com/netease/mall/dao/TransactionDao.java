@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * @author : francis
- * @description :
+ * @description : 交易Dao
  * @time : 2018/3/28,0:34
  * @update :
  */
@@ -24,6 +24,10 @@ public interface TransactionDao {
     @Select({" select SUM(num) from ", TABLE_NAME ," where product_id=#{productId} "})
     Integer getTransactionCountByProductId(@Param("productId") int productId);
 
+    /**
+     *
+     * @param productId
+     */
     @Delete({" delete from ", TABLE_NAME ," where product_id=#{productId}"})
     void deleteTransactionByProductId(@Param("productId") int productId);
 

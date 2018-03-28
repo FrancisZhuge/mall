@@ -33,6 +33,12 @@ public class IndexController {
     @Autowired
     private ProductService productService;
 
+    /**
+     * 首页信息展示
+     * @param model
+     * @param type
+     * @return
+     */
     @RequestMapping(value = {"/","/index"})
     public String toIndex(Model model,
                           @RequestParam(value = "type",required = false)String type){

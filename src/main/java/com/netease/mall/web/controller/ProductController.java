@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -37,6 +38,7 @@ import java.util.UUID;
  * @update :
  */
 @Controller
+@PropertySource("classpath:properties/dev.properties")
 public class ProductController {
     private final static Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
 
@@ -52,19 +54,31 @@ public class ProductController {
     @Autowired
     HostHolder hostHolder;
 
+    //获取配置信息
     @Value("${img.local.path}")
     private String imgPath;
 
+    /**
+     * 数据回显
+     */
     private final ResourceLoader resourceLoader;
 
+    /**
+     * 数据回显
+     */
     @Autowired
     public ProductController(ResourceLoader resourceLoader) {
         this.resourceLoader = resourceLoader;
     }
 
+    /**
+     * 删除product
+     * @param id
+     * @return
+     */
     @RequestMapping("/api/delete")
     @ResponseBody
-    Map<String, Object> deleteContent(HttpSession session, @RequestParam(value = "id",required = false) String id){
+    Map<String, Object> deleteProduct(@RequestParam(value = "id",required = false) String id){
         Map<String, Object> result = null;
         if (StringUtils.isBlank(id)){
             result = new HashMap<>();
@@ -102,6 +116,12 @@ public class ProductController {
         return result;
     }
 
+    /**
+     * 详情页
+     * @param productId
+     * @param model
+     * @return
+     */
     @RequestMapping("/show")
     public String show(@RequestParam("id") String productId, Model model){
         User user = hostHolder.getUser();
@@ -119,6 +139,16 @@ public class ProductController {
         return "show";
     }
 
+    /**
+     * 提交发布
+     * @param title
+     * @param summary
+     * @param image
+     * @param content
+     * @param price
+     * @param model
+     * @return
+     */
     @RequestMapping("/publicSubmit")
     public String publicSubmit(@RequestParam(value = "title") String title,
                                @RequestParam(value = "summary") String summary,
@@ -161,6 +191,12 @@ public class ProductController {
         }
     }
 
+    /**
+     * 上传图片
+     * @param file
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/api/upload")
     @ResponseBody
     public Map<String, Object> imageUpload(@RequestParam("file") MultipartFile file) throws Exception{
@@ -176,6 +212,12 @@ public class ProductController {
         return map;
     }
 
+    /**
+     * 更改回填
+     * @param productId
+     * @param model
+     * @return
+     */
     @RequestMapping("/edit")
     public String edit(@RequestParam("id") int productId,Model model){
         Product product = productService.getProductById(productId);
@@ -185,6 +227,17 @@ public class ProductController {
         return "edit";
     }
 
+    /**
+     * 更改提交
+     * @param productId
+     * @param title
+     * @param summary
+     * @param image
+     * @param content
+     * @param price
+     * @param model
+     * @return
+     */
     @RequestMapping("/editSubmit")
     public String editSubmit(@RequestParam(value = "id") int productId,
                              @RequestParam(value = "title") String title,

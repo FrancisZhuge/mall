@@ -56,9 +56,10 @@ CREATE TABLE IF NOT EXISTS transaction (
   PRIMARY KEY (id)
 ) ENGINE=InnoDB AUTO_INCREMENT = 2 DEFAULT CHARSET=utf8;
 
--- ------
+-- ---------------
 -- 购物车
--- ------
+-- 使用redis来存储
+-- ---------------
 # DROP TABLE IF EXISTS cart;
 # CREATE TABLE IF NOT EXISTS cart(
 #   id BIGINT NOT NULL AUTO_INCREMENT COMMENT '主键',

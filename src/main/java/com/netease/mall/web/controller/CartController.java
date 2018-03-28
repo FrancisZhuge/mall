@@ -22,7 +22,7 @@ import java.util.*;
 
 /**
  * @author : francis
- * @description :
+ * @description : 购物车Controller
  * @time : 2018/3/28,3:32
  * @update :
  */
@@ -40,12 +40,17 @@ public class CartController {
     @Autowired
     HostHolder hostHolder;
 
+    /**
+     * 加入购物车
+     * @param map
+     * @param response
+     * @return
+     */
     @RequestMapping("/api/addCart")
     @ResponseBody
     public Map<String, Object> addCart(@RequestBody Map<String, Object> map,
                                        HttpServletResponse response){
         Map<String, Object> result = new HashMap<>();
-        System.out.println(map);
         if (map != null){
             cartService.addCart(map);
             response.setStatus(200);
@@ -60,8 +65,14 @@ public class CartController {
         }
     }
 
+    /**
+     * 列出当前用户所有购物车信息
+     * @param response
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/settleAccount")
-    public String settleAccount(Model model,HttpServletResponse response) throws Exception{
+    public String settleAccount(HttpServletResponse response) throws Exception{
         List<Map<String, Object>> cartProductVos = null;
         try {
              cartProductVos = cartService.list();
@@ -77,6 +88,11 @@ public class CartController {
         return "settleAccount";
     }
 
+    /**
+     * 购买
+     * @param maps
+     * @return
+     */
     @RequestMapping("/api/buy")
     @ResponseBody
     public Map<String, Object> buy(@RequestBody List<Map<String, Object>> maps){
@@ -95,15 +111,18 @@ public class CartController {
         cartService.del(hostHolder.getUser().getId());
         result.put("code", 200);
         result.put("message", "购买成功");
-        System.out.println("here");
         return result;
     }
 
+    /**
+     * 历史交易信息
+     * @param model
+     * @return
+     */
     @RequestMapping("/account")
     public String account(Model model){
         try {
             List<Finance> finances = transactionService.listFinanceByBuyerId(hostHolder.getUser().getId());
-            System.out.println(finances);
             model.addAttribute("buyList",finances);
         } catch (Exception e) {
             LOGGER.error("list failed");

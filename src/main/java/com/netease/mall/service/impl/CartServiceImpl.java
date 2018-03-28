@@ -50,7 +50,6 @@ public class CartServiceImpl implements CartService{
             cartProductVo.setTitle(title);
             cartProductVo.setBuyerId(hostHolder.getUser().getId());
             String cartProductJson = JSONObject.toJSONString(cartProductVo);
-            System.out.println("增加数量"+cartProductJson);
             redisService.save(RedisKeyUtil.getCartKey(hostHolder.getUser().getId()), productId+"",cartProductJson);
         }else {
             //不存在,新增
@@ -61,7 +60,6 @@ public class CartServiceImpl implements CartService{
             cartProductVo.setPrice(price);
             cartProductVo.setNum(num);
             String cartProductJson = JSONObject.toJSONString(cartProductVo);
-            System.out.println("新增"+cartProductJson);
             redisService.save(RedisKeyUtil.getCartKey(hostHolder.getUser().getId()), productId+"",cartProductJson);
         }
     }
